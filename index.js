@@ -115,6 +115,11 @@ module.exports = function Email(sails) {
           if (sails.config[self.configKey].transporter) {
             // If custom transporter is set, use that first
             transport = nodemailer.createTransport(sails.config[self.configKey].transporter);
+
+            if(typeof sails.config[self.configKey].pluginHook === 'function') {
+              sails.config[self.configKey].transporter.pluginHook(transport);
+            }
+
           } else {
             // create reusable transport method (opens pool of SMTP connections)
             var smtpPool = require('nodemailer-smtp-pool');
