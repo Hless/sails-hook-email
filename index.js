@@ -117,7 +117,7 @@ module.exports = function Email(sails) {
             transport = nodemailer.createTransport(sails.config[self.configKey].transporter);
 
             if(typeof sails.config[self.configKey].pluginHook === 'function') {
-              sails.config[self.configKey].transporter.pluginHook(transport);
+              sails.config[self.configKey].pluginHook(transport);
             }
 
           } else {
